@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk -F'|' 'function v\\(s,k,p,a\\){p=index\\(s,\"|\"k\"=\"\\);if\\(!p\\)return\"\";a=substr\\(s,p+length\\(k\\)+2\\);sub\\(/\\\\|.*/,\"\",a\\);return a} /RECORD=Net\\\\|/{n=v\\($0,\"NAME\"\\); if\\(n==\"VDD_3V3\"||n==\"GND\"||n==\"VDDA_3V3\"\\)print v\\($0,\"ID\"\\)\"\\\\t\"n}' /tmp/pcb_lines.txt)",
+      "Bash(awk ' *)",
+      "Bash(sort -t'=' -k2 -n)",
+      "Bash(awk 'function v\\(s,k,p,a\\){p=index\\(s,\"|\"k\"=\"\\);if\\(!p\\)return\"\";a=substr\\(s,p+length\\(k\\)+2\\);sub\\(/\\\\|.*/,\"\",a\\);return a} /RECORD=Component\\\\|/{d=v\\($0,\"SOURCEDESIGNATOR\"\\); if\\(d==\"R46\"||d==\"C41\"||d==\"U8\"\\){x=v\\($0,\"X\"\\);y=v\\($0,\"Y\"\\);gsub\\(/mil/,\"\",x\\);gsub\\(/mil/,\"\",y\\);printf \"%-4s center=\\(%.0f, %.0f\\)mil  layer=%s  pattern=%s\\\\n\",d,x+0,y+0,v\\($0,\"LAYER\"\\),v\\($0,\"PATTERN\"\\)}}' /tmp/pcb_lines.txt)",
+      "Bash(awk '-F\",\"' '{print $1\" | \"$2\" | layer:\"$NF}')"
+    ]
+  }
+}
